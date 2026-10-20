@@ -53,17 +53,63 @@ The idealized roofline-style runtime is:
 The calculated `memory_area_mm2` represents **only a hypothetical on-chip memory macro**, not total NPU silicon area. This model does not implement a real SRAM/eDRAM timing model, process-technology dependence, lifetime/reliability, device-level refresh, or an actual physical design. Neither physical accuracy nor a hardware speedup is claimed.
 
 ## Additional Experiments
-# Automatic DRAM bandwidth exploration
+
+The following experiments investigate memory bandwidth sensitivity
+and performance bottlenecks in the analytical NPU model.
+
+### 1. Automatic DRAM Bandwidth Exploration
+
+Evaluate SRAM and eDRAM configurations across multiple external
+DRAM bandwidths (3, 6, 12, 24, and 48 GB/s).
+
+```bash
 uv run python experiments/bandwidth_sweep.py
+```
 
-# Compare the 6 GB/s and 12 GB/s experiments
+**Output:**
+- `results/bandwidth_sweep.csv`
+- `figures/bottleneck_heatmap_sram.png`
+- `figures/bottleneck_heatmap_edram.png`
+
+### 2. DRAM Bandwidth Comparison
+
+Compare execution latency at 6 GB/s and 12 GB/s for different
+on-chip memory capacities.
+
+```bash
 uv run python experiments/compare_bandwidth.py
+```
 
-# Run the on-chip bandwidth demonstration
+**Output:**
+- `results/bandwidth_comparison.csv`
+- `figures/bandwidth_comparison_sram.png`
+- `figures/bandwidth_comparison_edram.png`
+
+**Observation:** Under the analytical model, larger on-chip
+memory capacities generally reduce sensitivity to external
+DRAM bandwidth.
+
+### 3. On-Chip Memory Bandwidth Demonstration
+
+Investigate the transition from compute-bound to on-chip
+memory-bound execution using hypothetical memory configurations.
+
+```bash
 uv run npu-explore \
   --config configs/onchip_bandwidth_demo.json \
   --results results/onchip_demo \
   --figures figures/onchip_demo
+```
+
+**Observation:** With the selected assumptions, the SRAM
+configuration is compute-bound while the eDRAM configuration
+becomes limited by on-chip memory bandwidth.
+
+### Model Limitations
+
+All results are analytical estimates based on hypothetical
+hardware parameters. They are not physical hardware measurements
+or predictions of actual NXP processors.
 
 ## Output
 

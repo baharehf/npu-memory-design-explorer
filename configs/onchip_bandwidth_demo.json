@@ -1,0 +1,38 @@
+{
+  "_disclaimer": "All technology parameters below are hypothetical teaching assumptions, NOT measured device data or NXP specifications.",
+  "_units": "GB/s and KiB use decimal and binary units respectively; pJ = picojoule; mm2 = square millimetres.",
+  "workload": {
+    "m": 256,
+    "n": 256,
+    "k": 256,
+    "bytes_per_element": 1,
+    "accumulator_bytes": 4
+  },
+  "hardware": {
+    "macs_per_second": 200000000000,
+    "dram_bandwidth_gbps": 48.0,
+    "dram_energy_pj_per_byte": 100.0,
+    "mac_energy_pj": 0.5
+  },
+  "capacity_sweep_kib": [4, 8, 16, 32, 64, 128],
+  "architectures": [
+    {
+      "name": "SRAM",
+      "capacity_kib": 64,
+      "onchip_bandwidth_gbps": 1000.0,
+      "onchip_energy_pj_per_byte": 2.0,
+      "static_power_mw_per_mib": 8.0,
+      "refresh_power_mw_per_mib": 0.0,
+      "memory_area_mm2_per_mib": 1.6
+    },
+    {
+      "name": "eDRAM",
+      "capacity_kib": 64,
+      "onchip_bandwidth_gbps": 200.0,
+      "onchip_energy_pj_per_byte": 1.2,
+      "static_power_mw_per_mib": 3.0,
+      "refresh_power_mw_per_mib": 7.0,
+      "memory_area_mm2_per_mib": 0.7
+    }
+  ]
+}

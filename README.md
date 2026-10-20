@@ -52,6 +52,19 @@ The idealized roofline-style runtime is:
 
 The calculated `memory_area_mm2` represents **only a hypothetical on-chip memory macro**, not total NPU silicon area. This model does not implement a real SRAM/eDRAM timing model, process-technology dependence, lifetime/reliability, device-level refresh, or an actual physical design. Neither physical accuracy nor a hardware speedup is claimed.
 
+## Additional Experiments
+# Automatic DRAM bandwidth exploration
+uv run python experiments/bandwidth_sweep.py
+
+# Compare the 6 GB/s and 12 GB/s experiments
+uv run python experiments/compare_bandwidth.py
+
+# Run the on-chip bandwidth demonstration
+uv run npu-explore \
+  --config configs/onchip_bandwidth_demo.json \
+  --results results/onchip_demo \
+  --figures figures/onchip_demo
+
 ## Output
 
 | Figure | Question it helps explore |
